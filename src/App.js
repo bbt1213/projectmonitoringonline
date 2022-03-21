@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { React, useState } from "react";
+import BarChart from "./components/common/BarChart";
+import { UserData } from "./SampleData/Data";
 
 function App() {
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.year),
+    datasets: [
+      {
+        label: "Actual",
+        data: UserData.map((data) => data.Actual),
+        backgroundColor: ["blue"],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+      {
+        label: "Target",
+        data: UserData.map((data) => data.Target),
+        backgroundColor: ["green"],
+        borderColor: "black",
+        borderWidth: 1,
+      },
+    ],
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: 700 }}>
+      {" "}
+      <BarChart chartData={userData} />
     </div>
   );
 }
